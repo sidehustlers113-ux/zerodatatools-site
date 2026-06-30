@@ -2030,25 +2030,28 @@ Example: 'A tool that searches a PostgreSQL database given a table name and a WH
     let paramCount      = 0;
     let currentScaffold = '';
 
-    const dropZone     = document.getElementById('drop-zone');
-    const fileInput    = document.getElementById('file-input');
-    const contextInput = document.getElementById('context-input');
-    const proceedBtn   = document.getElementById('proceed-btn');
-    const configPanel  = document.getElementById('config-panel');
-    const targetToggle = document.getElementById('target-toggle');
-    const fieldName    = document.getElementById('field-name');
-    const fieldServer  = document.getElementById('field-server');
-    const fieldDesc    = document.getElementById('field-desc');
-    const fieldTrigger = document.getElementById('field-trigger');
-    const skillTrigRow = document.getElementById('skill-trigger-row');
-    const paramsList   = document.getElementById('params-list');
-    const addParamBtn  = document.getElementById('add-param-btn');
-    const generateBtn  = document.getElementById('generate-btn');
-    const outputPanel  = document.getElementById('output-panel');
-    const outputCode   = document.getElementById('output-code');
-    const targetPill   = document.getElementById('target-pill');
-    const copyBtn      = document.getElementById('copy-btn');
-    const serverLabel  = document.getElementById('field-server-label');
+    const root = document.getElementById('mcp-skill-generator');
+    const $id  = function(id) { return root.querySelector('#' + id); };
+
+    const dropZone     = $id('drop-zone');
+    const fileInput    = $id('file-input');
+    const contextInput = $id('context-input');
+    const proceedBtn   = $id('proceed-btn');
+    const configPanel  = $id('config-panel');
+    const targetToggle = $id('target-toggle');
+    const fieldName    = $id('field-name');
+    const fieldServer  = $id('field-server');
+    const fieldDesc    = $id('field-desc');
+    const fieldTrigger = $id('field-trigger');
+    const skillTrigRow = $id('skill-trigger-row');
+    const paramsList   = $id('params-list');
+    const addParamBtn  = $id('add-param-btn');
+    const generateBtn  = $id('generate-btn');
+    const outputPanel  = $id('output-panel');
+    const outputCode   = $id('output-code');
+    const targetPill   = $id('target-pill');
+    const copyBtn      = $id('copy-btn');
+    const serverLabel  = $id('field-server-label');
 
     // File drop
     ['dragenter', 'dragover'].forEach(function(ev) {

@@ -126,17 +126,21 @@
     .tool-card button:hover { background: var(--teal-hover); }
     .home-privacy { font-size: 12px; color: var(--text-muted); text-align: center; }
 
-    /* Site footer — home page only */
+    /* Site footer — fixed to bottom on home, hidden on tool pages */
     #site-footer {
-      border-top: 1px solid var(--border); padding: 14px 24px;
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+      border-top: 1px solid var(--border); padding: 10px 24px;
       display: flex; align-items: center; justify-content: center;
       flex-wrap: wrap; gap: 4px 0;
+      background: var(--bg-panel);
       color: var(--text-muted); font-size: 11px; letter-spacing: 0.02em;
     }
     #site-footer a { color: var(--text-muted); text-decoration: none; transition: color 0.15s; }
     #site-footer a:hover { color: var(--teal); }
     #site-footer .sf-sep { margin: 0 8px; opacity: 0.5; }
     body.tool-active #site-footer { display: none; }
+    /* Pad home content so last card isn't hidden behind fixed footer */
+    #home { padding-bottom: 44px; }
 
     /* Suppress inner tool chrome — shell header provides navigation */
     #prompt-constructor .suite-nav,

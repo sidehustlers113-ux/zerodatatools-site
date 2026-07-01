@@ -942,7 +942,7 @@
         await navigator.clipboard.writeText(text);
         const orig=btn.textContent; btn.textContent='Copied.'; btn.disabled=true;
         setStatus('Copied to clipboard.');
-        zdtKofi.show(document.getElementById('kofi-prompt-constructor'));
+        zdtKofi.showForTool(document.getElementById('kofi-prompt-constructor'), 'pc');
         setTimeout(function(){btn.textContent=orig;btn.disabled=false;},1500);
       } catch(err) {
         btn.textContent='Failed — copy manually.';
@@ -1656,7 +1656,7 @@
         copyBtn.innerHTML = '📋 Copy JSON';
         copyBtn.classList.remove('copied');
       }, 2000);
-      zdtKofi.show(document.getElementById('kofi-data-converter'));
+      zdtKofi.showForTool(document.getElementById('kofi-data-converter'), 'dc');
     });
 
     function syntaxHighlight(json) {
@@ -2500,7 +2500,7 @@ Example: 'A tool that searches a PostgreSQL database given a table name and a WH
       copyBtn.textContent = '✅ Copied!';
       copyBtn.classList.add('copied');
       setTimeout(function() { copyBtn.innerHTML = '📋 Copy Scaffold'; copyBtn.classList.remove('copied'); }, 2200);
-      zdtKofi.show(document.getElementById('kofi-mcp-skill-generator'));
+      zdtKofi.showForTool(document.getElementById('kofi-mcp-skill-generator'), 'mcp');
     });
 
     function escAttr(s) { return String(s || '').replace(/"/g, '&quot;'); }
@@ -2655,7 +2655,18 @@ Example: 'A tool that searches a PostgreSQL database given a table name and a WH
     toastEl.classList.remove('visible');
   }
   // Expose globally so each tool's copy handler can call it
-  window.zdtKofi = { show: showKofiToast, hide: hideKofiToast };
+  window.zdtKofi = {
+    show: showKofiToast,
+    hide: hideKofiToast,
+    showForTool(toastEl, toolKey) {
+      const key = 'zdt_kofi_tool_' + toolKey;
+      if (sessionStorage.getItem(key)) return;
+      sessionStorage.setItem(key, '1');
+      toastEl.classList.add('visible');
+      clearTimeout(toastEl._timer);
+      toastEl._timer = setTimeout(() => hideKofiToast(toastEl), 12000);
+    }
+  };
 
   // Mobile menu
   window.zdtMobileMenu = {
